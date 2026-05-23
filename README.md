@@ -24,7 +24,7 @@ A browser-based 3D solar system you steer with webcam hand gestures — swipe be
 - **Cyberpunk aesthetic** — scanlines, vignette, glowing accents, Space Mono + Rajdhani type pairing.
 - **Responsive + accessible** — collapses cleanly under 720 px, honors `prefers-reduced-motion`.
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 | Layer          | Tech                                                                                        |
 | -------------- | ------------------------------------------------------------------------------------------- |
