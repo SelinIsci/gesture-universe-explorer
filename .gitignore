@@ -8,3 +8,7 @@ dist/
 Thumbs.db
 .idea/
 .vscode/
+
+# Local Claude artifacts — not for public repo
+CLAUDE.md
+.claude/
