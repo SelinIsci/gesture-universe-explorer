@@ -13,8 +13,8 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⏸ paused
 | 0a  | `git init`, `.gitignore`, initial commit of the working single-file prototype | ✅     |
 | 0b  | Generate `CLAUDE.md` (local-only, git-ignored)                                | ✅     |
 | 0c  | `docs/` folder — ARCHITECTURE, GESTURES, DATA, DEVELOPMENT, CREDITS, PROGRESS | ✅     |
-| 0d  | Professional `README.md`                                                      | 🟡     |
-| 0e  | Commit: `docs: add README, architecture docs, progress tracker`               | ⬜     |
+| 0d  | Professional `README.md`                                                      | ✅     |
+| 0e  | Commit: `docs: add README, architecture docs, progress tracker`               | ✅     |
 
 **Notes**
 
