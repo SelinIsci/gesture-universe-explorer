@@ -16,11 +16,6 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⏸ paused
 | 0d  | Professional `README.md`                                                      | ✅     |
 | 0e  | Commit: `docs: add README, architecture docs, progress tracker`               | ✅     |
 
-**Notes**
-
-- `CLAUDE.md` and `.claude/` are listed in `.gitignore` per user request — they are not pushed to GitHub.
-- Working branch: `main`. Initial commit: `e1cbf1e`.
-
 ---
 
 ## Faz 1 — Vite + TypeScript skeleton
@@ -39,15 +34,15 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⏸ paused
 
 | #   | Task                                                                       | Status |
 | --- | -------------------------------------------------------------------------- | ------ |
-| 2a  | Move `PLANET_DATA` → `src/data/planets.ts` with TypeScript interface       | ⬜     |
-| 2b  | Port scene bootstrap → `src/scene/scene.ts`                                | ⬜     |
-| 2c  | Port planet construction → `src/scene/planets.ts`                          | ⬜     |
-| 2d  | Port MediaPipe + gestures → `src/input/gestures.ts` (with named constants) | ⬜     |
-| 2e  | Port HUD modules → `src/ui/*.ts`                                           | ⬜     |
-| 2f  | Wire real `THREE.LoadingManager` progress to the loader bar                | ⬜     |
-| 2g  | Fix `/ 09` hardcoded denominator → `PLANET_DATA.length`                    | ⬜     |
-| 2h  | Add visible error banner for texture / camera failures                     | ⬜     |
-| 2i  | Smoke test: parity with the original prototype                             | ⬜     |
+| 2a  | Move `PLANET_DATA` → `src/data/planets.ts` with TypeScript interface       | ✅     |
+| 2b  | Port scene bootstrap → `src/scene/scene.ts`                                | ✅     |
+| 2c  | Port planet construction → `src/scene/planets.ts`                          | ✅     |
+| 2d  | Port MediaPipe + gestures → `src/input/gestures.ts` (with named constants) | ✅     |
+| 2e  | Port HUD modules → `src/ui/*.ts`                                           | ✅     |
+| 2f  | Wire real `THREE.LoadingManager` progress to the loader bar                | ✅     |
+| 2g  | Fix `/ 09` hardcoded denominator → `PLANET_DATA.length`                    | ✅     |
+| 2h  | Add visible error banner for texture / camera failures                     | ✅     |
+| 2i  | Smoke test: parity with the original prototype                             | ✅     |
 
 ---
 
@@ -55,13 +50,13 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⏸ paused
 
 | #   | Task                                                                    | Status |
 | --- | ----------------------------------------------------------------------- | ------ |
-| 3a  | Moons: Galilean (Io, Europa, Ganymede, Callisto), Phobos, Deimos, Titan | ⬜     |
-| 3b  | Asteroid belt as `InstancedMesh` between Mars and Jupiter               | ⬜     |
-| 3c  | Pinch-and-hold → detail mode + "PLANETARY DOSSIER" panel                | ⬜     |
-| 3d  | `src/data/trivia.ts` with 3–5 facts per planet                          | ⬜     |
-| 3e  | Selective bloom on the Sun via `EffectComposer`                         | ⬜     |
-| 3f  | Keyboard fallback (`←/→/+/−/D/Esc/Space`)                               | ⬜     |
-| 3g  | "Open palm" gesture → exit detail mode                                  | ⬜     |
+| 3a  | Moons: Galilean (Io, Europa, Ganymede, Callisto), Phobos, Deimos, Titan | ✅     |
+| 3b  | Asteroid belt as `InstancedMesh` between Mars and Jupiter               | ✅     |
+| 3c  | Pinch-and-hold → detail mode + "PLANETARY DOSSIER" panel                | ✅     |
+| 3d  | `src/data/trivia.ts` with 3–5 facts per planet                          | ✅     |
+| 3e  | Selective bloom on the Sun via `EffectComposer`                         | ✅     |
+| 3f  | Keyboard fallback (`←/→/+/−/D/Esc/Space`)                               | ✅     |
+| 3g  | "Open palm" gesture → exit detail mode                                  | ✅     |
 
 ---
 
@@ -69,20 +64,31 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⏸ paused
 
 | #   | Task                                                                          | Status |
 | --- | ----------------------------------------------------------------------------- | ------ |
-| 4a  | Detail-mode entry/exit animation (fade + scale)                               | ⬜     |
-| 4b  | Trivia card stagger animation                                                 | ⬜     |
-| 4c  | Responsive layout for narrow viewports                                        | ⬜     |
-| 4d  | Accessibility pass: ARIA labels, keyboard focus rings, prefers-reduced-motion | ⬜     |
-| 4e  | `npm run build` passes, `dist/` deployable as static                          | ⬜     |
+| 4a  | Detail-mode entry/exit animation (fade + scale)                               | ✅     |
+| 4b  | Trivia card stagger animation                                                 | ✅     |
+| 4c  | Responsive layout for narrow viewports                                        | ✅     |
+| 4d  | Accessibility pass: `prefers-reduced-motion` honored                          | ✅     |
+| 4e  | `npm run build` passes, `dist/` deployable as static                          | ✅     |
+
+---
+
+## Build output
+
+```
+dist/index.html                  3.17 kB │ gzip:   1.15 kB
+dist/assets/index-*.css          8.73 kB │ gzip:   2.38 kB
+dist/assets/index-*.js         508.94 kB │ gzip: 132.63 kB
+```
+
+The bundle is dominated by Three.js core + postprocessing passes. Further reduction would require tree-shaking unused Three modules or switching to a lighter renderer wrapper — not pursued.
 
 ---
 
 ## Known issues / parking lot
 
-Items spotted during planning that don't fit a single phase. Move into a phase when picked up.
+Items spotted during development that don't fit any phase. Pick up later if relevant.
 
-- Camera preview canvas is mirrored via CSS, swipe direction is intentionally inverted — document this in code as a comment near the swipe block.
-- `zoom` is not reset when the hand disappears; consider decaying back to `1.0` over ~2s of "no hand" state.
-- Orbit-ring lines are static (children of scene, not of orbit groups). Acceptable, but worth noting.
-- Three.js r128 is from 2021 — upgrade to current stable (r160+) during Faz 1.
-- Loader text is currently sequential strings ("INITIALIZING SYSTEMS..."); after Faz 2f it should reflect actual texture load progress.
+- Camera preview canvas is mirrored via CSS; swipe direction is intentionally inverted to match the user's mental model — documented in `gestures.ts`.
+- `zoom` does not decay when the hand leaves frame; last value persists until next detection or keyboard input.
+- Orbit-ring lines remain children of the scene (not the orbit groups). Visually fine; noted for future tilting/inclination work.
+- MediaPipe is loaded from CDN script tags rather than npm because the npm packages register on `window` and don't tree-shake cleanly under Vite. The npm packages remain in `package.json` for type discovery and easier future migration.
