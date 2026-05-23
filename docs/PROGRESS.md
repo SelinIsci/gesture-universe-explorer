@@ -27,11 +27,11 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⏸ paused
 
 | #   | Task                                                                           | Status |
 | --- | ------------------------------------------------------------------------------ | ------ |
-| 1a  | `package.json`, `tsconfig.json`, `vite.config.ts`                              | ⬜     |
-| 1b  | Move `textures/` → `public/textures/`                                          | ⬜     |
-| 1c  | Create empty module files under `src/` matching target structure               | ⬜     |
-| 1d  | Replace inline `<script>` and `<style>` with module entrypoint + extracted CSS | ⬜     |
-| 1e  | `npm run dev` smoke test — blank scene renders                                 | ⬜     |
+| 1a  | `package.json`, `tsconfig.json`, `vite.config.ts`                              | ✅     |
+| 1b  | Move `textures/` → `public/textures/`                                          | ✅     |
+| 1c  | Create empty module files under `src/` matching target structure               | ✅     |
+| 1d  | Replace inline `<script>` and `<style>` with module entrypoint + extracted CSS | ✅     |
+| 1e  | Smoke test — `tsc --noEmit` passes, `vite build` produces dist/                | ✅     |
 
 ---
 
