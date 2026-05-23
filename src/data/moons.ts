@@ -1,5 +1,7 @@
+import type { PlanetName } from './planets';
+
 export interface Moon {
-  parent: string;
+  parent: PlanetName;
   name: string;
   size: number;
   orbitRadius: number;
@@ -20,3 +22,10 @@ export const MOONS: Moon[] = [
   { parent: 'JUPITER', name: 'Callisto', size: 1.4, orbitRadius: 30, orbitSpeed: 0.008, rotSpeed: 0.01, color: 0x4a4238 },
   { parent: 'SATURN', name: 'Titan', size: 1.6, orbitRadius: 22, orbitSpeed: 0.01, rotSpeed: 0.008, color: 0xd8a868 },
 ];
+
+export const MOONS_BY_PARENT: Map<PlanetName, Moon[]> = MOONS.reduce((map, m) => {
+  const list = map.get(m.parent) ?? [];
+  list.push(m);
+  map.set(m.parent, list);
+  return map;
+}, new Map<PlanetName, Moon[]>());

@@ -6,8 +6,17 @@ declare global {
   const Hands: any;
   const Camera: any;
   const HAND_CONNECTIONS: any;
-  function drawConnectors(ctx: CanvasRenderingContext2D, landmarks: any, conns: any, opts: any): void;
-  function drawLandmarks(ctx: CanvasRenderingContext2D, landmarks: any, opts: any): void;
+  function drawConnectors(
+    ctx: CanvasRenderingContext2D,
+    landmarks: any,
+    conns: any,
+    opts: any,
+  ): void;
+  function drawLandmarks(
+    ctx: CanvasRenderingContext2D,
+    landmarks: any,
+    opts: any,
+  ): void;
 }
 
 export const SWIPE_THRESHOLD = 0.15;
@@ -53,7 +62,8 @@ export function startGestures(
   let pinchHoldFired = false;
 
   const hands = new Hands({
-    locateFile: (f: string) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${f}`,
+    locateFile: (f: string) =>
+      `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${f}`,
   });
   hands.setOptions({
     maxNumHands: 1,
@@ -71,7 +81,10 @@ export function startGestures(
 
     if (results.multiHandLandmarks?.length > 0) {
       const hand = results.multiHandLandmarks[0];
-      drawConnectors(ctx, hand, HAND_CONNECTIONS, { color: 'rgba(0,242,255,0.7)', lineWidth: 1.5 });
+      drawConnectors(ctx, hand, HAND_CONNECTIONS, {
+        color: 'rgba(0,242,255,0.7)',
+        lineWidth: 1.5,
+      });
       drawLandmarks(ctx, hand, { color: '#ff4d6d', radius: 2, lineWidth: 1 });
       cb.onHandActive(true);
 
@@ -84,7 +97,13 @@ export function startGestures(
       }
 
       const pinch = Math.hypot(hand[4].x - hand[8].x, hand[4].y - hand[8].y);
-      const target = THREE.MathUtils.mapLinear(pinch, PINCH_MIN, PINCH_MAX, ZOOM_MIN, ZOOM_MAX);
+      const target = THREE.MathUtils.mapLinear(
+        pinch,
+        PINCH_MIN,
+        PINCH_MAX,
+        ZOOM_MIN,
+        ZOOM_MAX,
+      );
       cb.onZoom(THREE.MathUtils.clamp(target, ZOOM_MIN, ZOOM_MAX));
 
       // Pinch-and-hold → detail mode
@@ -92,7 +111,10 @@ export function startGestures(
         if (pinchHoldStart === 0) {
           pinchHoldStart = performance.now();
           pinchHoldFired = false;
-        } else if (!pinchHoldFired && performance.now() - pinchHoldStart > PINCH_HOLD_MS) {
+        } else if (
+          !pinchHoldFired &&
+          performance.now() - pinchHoldStart > PINCH_HOLD_MS
+        ) {
           cb.onPinchHold();
           pinchHoldFired = true;
         }

@@ -1,22 +1,28 @@
 import * as THREE from 'three';
 import './styles/main.css';
 
-import { createScene } from './scene/scene';
-import { createPlanets } from './scene/planets';
 import { createAsteroidBelt } from './scene/asteroids';
+import { createPlanets } from './scene/planets';
 import { createComposer } from './scene/postprocess';
+import { createScene } from './scene/scene';
 
 import { startGestures } from './input/gestures';
 import { attachKeyboard } from './input/keyboard';
 
-import { startClock, setHandStatus, setKeyboardStatus, flash, showErrorBanner } from './ui/hud';
+import { hideDetail, isDetailVisible, showDetail } from './ui/detailPanel';
+import {
+  flash,
+  setHandStatus,
+  setKeyboardStatus,
+  showErrorBanner,
+  startClock,
+} from './ui/hud';
 import { updateInfoPanel } from './ui/infoPanel';
-import { buildNavDots } from './ui/navDots';
 import { wireLoader } from './ui/loader';
-import { showDetail, hideDetail, isDetailVisible } from './ui/detailPanel';
+import { buildNavDots } from './ui/navDots';
 
+import { ZOOM_MAX, ZOOM_MIN } from './input/gestures';
 import { createState } from './state';
-import { PLANET_DATA } from './data/planets';
 
 const state = createState();
 
@@ -28,7 +34,7 @@ const composer = createComposer(renderer, scene, camera);
 // UI
 startClock();
 buildNavDots(i => navigateTo(i));
-updateInfoPanel(0);
+updateInfoPanel(state.idx);
 void wireLoader(manager);
 
 // Gesture + keyboard wiring
@@ -64,7 +70,11 @@ startGestures(video, canvas, {
 attachKeyboard({
   onNavigate: dir => navigateTo(state.idx + dir),
   onZoomStep: dir => {
-    state.zoomTarget = THREE.MathUtils.clamp(state.zoomTarget + dir * 0.3, 0.5, 3.5);
+    state.zoomTarget = THREE.MathUtils.clamp(
+      state.zoomTarget + dir * 0.3,
+      ZOOM_MIN,
+      ZOOM_MAX,
+    );
   },
   onToggleDetail: () => (isDetailVisible() ? exitDetail() : enterDetail()),
   onExitDetail: () => exitDetail(),
@@ -83,13 +93,11 @@ function navigateTo(i: number): void {
 function enterDetail(): void {
   state.mode = 'detail';
   showDetail(state.idx);
-  document.body.classList.add('detail-mode');
 }
 
 function exitDetail(): void {
   state.mode = 'orbit';
   hideDetail();
-  document.body.classList.remove('detail-mode');
 }
 
 // Animation loop
@@ -106,13 +114,18 @@ function animate(): void {
 
   // Orbital + axial rotation
   for (const p of state.planets) {
-    if (state.autoRotate && p.data.name !== 'SUN') p.group.rotation.y += p.data.speed;
+    if (state.autoRotate && p.data.name !== 'SUN')
+      p.group.rotation.y += p.data.speed;
     p.mesh.rotation.y += 0.005;
 
     // Moons (animate in local space around parent mesh)
     for (const m of p.moons) {
       m.phase += m.orbitSpeed;
-      m.mesh.position.set(Math.cos(m.phase) * m.orbitRadius, m.mesh.position.y, Math.sin(m.phase) * m.orbitRadius);
+      m.mesh.position.set(
+        Math.cos(m.phase) * m.orbitRadius,
+        m.mesh.position.y,
+        Math.sin(m.phase) * m.orbitRadius,
+      );
       m.mesh.rotation.y += m.rotSpeed;
     }
   }
@@ -126,8 +139,13 @@ function animate(): void {
   const target = state.planets[state.idx];
   if (target) {
     target.mesh.getWorldPosition(tmpTarget);
-    const zoomFactor = state.mode === 'detail' ? 1.8 * state.zoom : 4.5 * state.zoom;
-    tmpVec.set(tmpTarget.x, tmpTarget.y + target.data.size * 0.4, tmpTarget.z + target.data.size * zoomFactor);
+    const zoomFactor =
+      state.mode === 'detail' ? 1.8 * state.zoom : 4.5 * state.zoom;
+    tmpVec.set(
+      tmpTarget.x,
+      tmpTarget.y + target.data.size * 0.4,
+      tmpTarget.z + target.data.size * zoomFactor,
+    );
     camera.position.lerp(tmpVec, state.mode === 'detail' ? 0.04 : 0.06);
     camera.lookAt(tmpTarget);
   }
@@ -135,8 +153,3 @@ function animate(): void {
   composer.render(dt);
 }
 animate();
-
-// Sanity check: log if PLANET_DATA length is unexpected
-if (PLANET_DATA.length !== 9) {
-  console.warn(`Unexpected PLANET_DATA length: ${PLANET_DATA.length}`);
-}

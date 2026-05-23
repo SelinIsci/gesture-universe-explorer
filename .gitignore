@@ -12,3 +12,4 @@ Thumbs.db
 # Local Claude artifacts — not for public repo
 CLAUDE.md
 .claude/
+TEMP.md

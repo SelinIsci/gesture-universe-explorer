@@ -26,4 +26,4 @@ If you redistribute this project, please verify each texture file against its up
 
 ## Inspiration
 
-The HUD aesthetic borrows from sci-fi cockpit / mission-control conventions popularized by *Alien*, *Mass Effect*, and *Destiny* UI design, filtered through a cyberpunk color palette (cyan + gold + magenta on near-black).
+The HUD aesthetic borrows from sci-fi cockpit / mission-control conventions popularized by _Alien_, _Mass Effect_, and _Destiny_ UI design, filtered through a cyberpunk color palette (cyan + gold + magenta on near-black).

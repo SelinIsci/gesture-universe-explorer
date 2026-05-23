@@ -4,9 +4,9 @@
 
 **Navigate the solar system with your hands.**
 
-A browser-based 3D solar system you steer with webcam hand gestures — swipe between planets, pinch to zoom, all in real time. Built with Three.js and Google MediaPipe Hands.
+A browser-based 3D solar system you steer with webcam hand gestures — swipe between planets, pinch to zoom, pinch-and-hold to dive into a Planetary Dossier. Built with Three.js and Google MediaPipe Hands.
 
-<sub>Cyberpunk HUD · Real-time hand tracking · Zero installs to try</sub>
+<sub>Cyberpunk HUD · Real-time hand tracking · 9 planets · 8 moons · Asteroid belt · Selective bloom</sub>
 
 </div>
 
@@ -14,82 +14,72 @@ A browser-based 3D solar system you steer with webcam hand gestures — swipe be
 
 ## ✨ Features
 
-- **Nine celestial bodies** — the Sun and all eight planets, with textured spheres, orbital motion, and Saturn's iconic ring system.
-- **Hand-gesture navigation** — swipe your index finger left or right to jump between worlds; pinch your thumb and index together to zoom.
-- **Live HUD** — planetary stats, an animated nav rail, a UTC clock, and a mirrored camera preview with skeletal overlay.
-- **Cyberpunk aesthetic** — scanlines, vignette, glowing accents, and a typeface mix of Space Mono and Rajdhani.
-- **Cinematic camera** — smooth lerped follow, focus flash on planet change, and a pulsing Sun light.
-
-### On the roadmap
-
-- Galilean moons of Jupiter, the Martian moons Phobos & Deimos, and Titan
-- A procedurally generated asteroid belt between Mars and Jupiter
-- A *Detail Mode* dossier with trivia, atmospheric composition, and notable features — entered with a pinch-and-hold gesture
-- Selective bloom on the Sun via post-processing
-- A keyboard fallback for setups without a webcam
-
-See [`docs/PROGRESS.md`](docs/PROGRESS.md) for the live tracker.
+- **Nine celestial bodies** — Sun and all eight planets with textured spheres, orbital motion, and Saturn's rings.
+- **Eight moons** — Earth's Moon (textured), Phobos & Deimos, the four Galilean satellites of Jupiter, and Titan.
+- **Procedural asteroid belt** — 2,500 instanced asteroids between Mars and Jupiter, rendered as a single draw call.
+- **Hand-gesture navigation** — swipe to change planet, pinch to zoom, pinch-and-hold to open detail mode, open palm to exit.
+- **Keyboard fallback** — `←` `→` `+` `−` `D` `Esc` `Space` work whether or not you have a webcam.
+- **Planetary Dossier** — detail-mode panel with trivia cards, atmospheric composition bars, and notable features per body.
+- **Cinematic camera + bloom** — smooth lerped follow, focus flash on planet change, pulsing Sun light, and `UnrealBloomPass` on bright pixels.
+- **Cyberpunk aesthetic** — scanlines, vignette, glowing accents, Space Mono + Rajdhani type pairing.
+- **Responsive + accessible** — collapses cleanly under 720 px, honors `prefers-reduced-motion`.
 
 ## 🛠 Tech Stack
 
-| Layer            | Tech                                                                                   |
-| ---------------- | -------------------------------------------------------------------------------------- |
-| 3D rendering     | [Three.js](https://threejs.org/)                                                       |
-| Hand tracking    | [MediaPipe Hands](https://developers.google.com/mediapipe/solutions/vision/hand_landmarker) |
-| Build (planned)  | [Vite](https://vitejs.dev/) + [TypeScript](https://www.typescriptlang.org/)            |
-| Fonts            | Space Mono · Rajdhani (Google Fonts)                                                   |
+| Layer          | Tech                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| 3D rendering   | [Three.js](https://threejs.org/) (r0.160) + `EffectComposer` / `UnrealBloomPass`            |
+| Hand tracking  | [MediaPipe Hands](https://developers.google.com/mediapipe/solutions/vision/hand_landmarker) |
+| Build          | [Vite 5](https://vitejs.dev/) + [TypeScript 5](https://www.typescriptlang.org/) (strict)    |
+| Fonts          | Space Mono · Rajdhani (Google Fonts)                                                        |
 
 ## 🚀 Quick Start
-
-### Current (single-file prototype)
-
-No build step required. Serve the folder with any static server and open it in a modern browser:
-
-```powershell
-# Windows / PowerShell
-python -m http.server 5500
-# then visit http://localhost:5500
-```
-
-Allow camera access when prompted. The HUD's `HAND STATUS` chip will switch from `◌ SEARCHING HAND` to `◉ HAND ACTIVE` once your hand is detected.
-
-### After refactor (planned)
 
 ```powershell
 npm install
 npm run dev     # http://localhost:5173 with HMR
-npm run build   # production bundle into dist/
+npm run build   # type-check + production bundle into dist/
 ```
+
+Allow camera access when prompted. The HUD's `HAND STATUS` chip will switch from `◌ SEARCHING HAND` to `◉ HAND ACTIVE` once your hand is detected. Without a webcam the chip turns to `⌨ KEYBOARD ACTIVE` after a few seconds and all keyboard controls take over.
 
 ## 🎮 Controls
 
-| Gesture                        | Action                            |
-| ------------------------------ | --------------------------------- |
-| 👋 Swipe index finger          | Previous / next planet            |
-| 🤏 Pinch thumb + index         | Zoom in / out                     |
-| 🤏✋ Pinch-and-hold *(planned)* | Enter planet detail mode          |
-| ✋ Open palm *(planned)*       | Exit detail mode                  |
-
-Planned keyboard fallback: `←` / `→` navigate, `+` / `−` zoom, `D` toggle detail, `Esc` exit, `Space` pause orbital motion.
+| Gesture                | Action                            | Keyboard           |
+| ---------------------- | --------------------------------- | ------------------ |
+| 👋 Swipe index finger  | Previous / next planet            | `←` / `→`          |
+| 🤏 Pinch thumb + index | Zoom in / out                     | `+` / `−`          |
+| 🤏✋ Pinch-and-hold    | Open Planetary Dossier            | `D` (toggle)       |
+| ✋ Open palm           | Close Planetary Dossier           | `Esc`              |
+| —                      | Pause / resume orbital motion     | `Space`            |
 
 ## 📁 Project Structure
 
 ```
 gesture-universe-explorer/
-├── index.html          # current single-file prototype
-├── textures/           # planet, moon, and Saturn-ring maps
-├── docs/               # architecture, gestures, data, dev, credits, progress
-└── README.md
+├── index.html              # shell + MediaPipe CDN tags + /src/main.ts
+├── package.json
+├── public/textures/        # planet, moon, and Saturn-ring maps
+├── src/
+│   ├── main.ts             # entrypoint
+│   ├── state.ts            # AppState + PlanetInstance
+│   ├── data/               # planets, moons, trivia (+ name-keyed lookup maps)
+│   ├── scene/              # scene, planets, asteroids, postprocess
+│   ├── input/              # gestures (MediaPipe), keyboard
+│   ├── ui/                 # info panel, nav dots, HUD, loader, detail panel
+│   └── styles/main.css
+└── docs/                   # architecture, gestures, data, dev, security, credits, progress
 ```
 
-The target structure after the Vite + TypeScript refactor lives in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the module-by-module breakdown.
 
 ## 📚 Documentation
 
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — current code organization and the refactored target structure
-- [`docs/GESTURES.md`](docs/GESTURES.md) — gesture system internals, tuning constants, and planned gestures
-- [`docs/DATA.md`](docs/DATA.md) — `PLANET_DATA` schema and planned moon / trivia models
-- [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) — local setup, debugging, and git workflow
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — module layout, rendering pipeline, state model
+- [`docs/GESTURES.md`](docs/GESTURES.md) — gesture detection, tuning constants, how to add a new gesture
+- [`docs/DATA.md`](docs/DATA.md) — `PlanetName` union, `Planet` / `Moon` / `Trivia` shapes, lookup maps
+- [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) — local setup, debugging, git workflow, project conventions
+- [`docs/SECURITY.md`](docs/SECURITY.md) — threat model, XSS defense in depth, supply-chain notes
 - [`docs/PROGRESS.md`](docs/PROGRESS.md) — phased roadmap with task status
 - [`docs/CREDITS.md`](docs/CREDITS.md) — library, font, and texture attributions
 

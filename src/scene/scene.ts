@@ -28,8 +28,10 @@ export function createScene(): SceneBundle {
   renderer.toneMappingExposure = 1.1;
   document.body.appendChild(renderer.domElement);
 
-  scene.add(new THREE.AmbientLight(0x223355, 1.6));
-  const sunLight = new THREE.PointLight(0xfff4e0, 8, 3500, 1.2);
+  scene.add(new THREE.AmbientLight(0x334466, 2.0));
+  // decay=0 → no distance falloff (stylized). With Three.js r0.160's default
+  // physical decay=2, planets past ~50 units would be almost unlit.
+  const sunLight = new THREE.PointLight(0xfff4e0, 2.5, 0, 0);
   scene.add(sunLight);
 
   // Starfield

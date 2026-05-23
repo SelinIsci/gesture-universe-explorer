@@ -32,20 +32,44 @@
       <div id="planet-index">OBJECT 01 / 09</div>
       <div id="planet-name">SUN</div>
       <div id="planet-subtitle">The Star</div>
-      <div class="stat-row"><span class="stat-label">Diameter</span><span class="stat-value" id="stat-diameter">—</span></div>
-      <div class="stat-row"><span class="stat-label">Distance</span><span class="stat-value" id="stat-distance">—</span></div>
-      <div class="stat-row"><span class="stat-label">Orbital Period</span><span class="stat-value" id="stat-period">—</span></div>
-      <div class="stat-row"><span class="stat-label">Surface Temp</span><span class="stat-value" id="stat-temp">—</span></div>
+      <div class="stat-row">
+        <span class="stat-label">Diameter</span
+        ><span class="stat-value" id="stat-diameter">—</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Distance</span
+        ><span class="stat-value" id="stat-distance">—</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Orbital Period</span
+        ><span class="stat-value" id="stat-period">—</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Surface Temp</span
+        ><span class="stat-value" id="stat-temp">—</span>
+      </div>
       <div id="planet-desc"></div>
       <div id="planet-type-badge"></div>
     </div>
 
     <!-- GESTURE GUIDE -->
     <div id="gesture-guide">
-      <div class="gesture-item"><span class="gesture-icon">👋</span><span class="gesture-text">Swipe → Navigate</span></div>
-      <div class="gesture-item"><span class="gesture-icon">🤏</span><span class="gesture-text">Pinch → Zoom</span></div>
-      <div class="gesture-item"><span class="gesture-icon">✊</span><span class="gesture-text">Hold → Detail</span></div>
-      <div class="gesture-item"><span class="gesture-icon">✋</span><span class="gesture-text">Open → Exit</span></div>
+      <div class="gesture-item">
+        <span class="gesture-icon">👋</span
+        ><span class="gesture-text">Swipe → Navigate</span>
+      </div>
+      <div class="gesture-item">
+        <span class="gesture-icon">🤏</span
+        ><span class="gesture-text">Pinch → Zoom</span>
+      </div>
+      <div class="gesture-item">
+        <span class="gesture-icon">✊</span
+        ><span class="gesture-text">Hold → Detail</span>
+      </div>
+      <div class="gesture-item">
+        <span class="gesture-icon">✋</span
+        ><span class="gesture-text">Open → Exit</span>
+      </div>
     </div>
 
     <!-- CAMERA FEED -->
@@ -59,9 +83,18 @@
     <div id="orbit-ring"><div id="orbit-fill" style="height: 11%"></div></div>
 
     <!-- MediaPipe (CDN; npm packages are tricky with Vite due to globals) -->
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+      crossorigin="anonymous"
+    ></script>
 
     <script type="module" src="/src/main.ts"></script>
   </body>

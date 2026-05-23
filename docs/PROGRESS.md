@@ -62,13 +62,13 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started · ⏸ paused
 
 ## Faz 4 — Polish
 
-| #   | Task                                                                          | Status |
-| --- | ----------------------------------------------------------------------------- | ------ |
-| 4a  | Detail-mode entry/exit animation (fade + scale)                               | ✅     |
-| 4b  | Trivia card stagger animation                                                 | ✅     |
-| 4c  | Responsive layout for narrow viewports                                        | ✅     |
-| 4d  | Accessibility pass: `prefers-reduced-motion` honored                          | ✅     |
-| 4e  | `npm run build` passes, `dist/` deployable as static                          | ✅     |
+| #   | Task                                                 | Status |
+| --- | ---------------------------------------------------- | ------ |
+| 4a  | Detail-mode entry/exit animation (fade + scale)      | ✅     |
+| 4b  | Trivia card stagger animation                        | ✅     |
+| 4c  | Responsive layout for narrow viewports               | ✅     |
+| 4d  | Accessibility pass: `prefers-reduced-motion` honored | ✅     |
+| 4e  | `npm run build` passes, `dist/` deployable as static | ✅     |
 
 ---
 
@@ -81,6 +81,22 @@ dist/assets/index-*.js         508.94 kB │ gzip: 132.63 kB
 ```
 
 The bundle is dominated by Three.js core + postprocessing passes. Further reduction would require tree-shaking unused Three modules or switching to a lighter renderer wrapper — not pursued.
+
+---
+
+## Post-refactor cleanup (`/simplify` + `/security-review`)
+
+| #   | Task                                                                                       | Status |
+| --- | ------------------------------------------------------------------------------------------ | ------ |
+| 5a  | Delete dead stub `src/scene/moons.ts`                                                      | ✅     |
+| 5b  | Add `PlanetName` union + `isStar()` predicate; type `Moon.parent` / `Trivia.planet`        | ✅     |
+| 5c  | Export `MOONS_BY_PARENT` and `TRIVIA_BY_PLANET` lookup maps; consumers use them            | ✅     |
+| 5d  | Remove dev cruft (`console.warn` sanity check, debug comment in `state.ts`)                | ✅     |
+| 5e  | `main.ts` imports `ZOOM_MIN`/`ZOOM_MAX` from `gestures.ts` instead of hardcoding           | ✅     |
+| 5f  | Move `body.detail-mode` class ownership into `detailPanel.ts`                              | ✅     |
+| 5g  | HTML escaper + hex-color allowlist for all `innerHTML` interpolations in `detailPanel.ts`  | ✅     |
+| 5h  | `docs/SECURITY.md` — threat model + supply-chain trade-offs                                | ✅     |
+| 5i  | Update README, CLAUDE.md, ARCHITECTURE, DATA, GESTURES, DEVELOPMENT to match refactored code | ✅     |
 
 ---
 

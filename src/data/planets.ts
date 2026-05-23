@@ -1,5 +1,16 @@
+export type PlanetName =
+  | 'SUN'
+  | 'MERCURY'
+  | 'VENUS'
+  | 'EARTH'
+  | 'MARS'
+  | 'JUPITER'
+  | 'SATURN'
+  | 'URANUS'
+  | 'NEPTUNE';
+
 export interface Planet {
-  name: string;
+  name: PlanetName;
   subtitle: string;
   type: 'STAR' | 'TERRESTRIAL' | 'GAS GIANT' | 'ICE GIANT';
   typeColor: string;
@@ -153,3 +164,5 @@ export const PLANET_DATA: Planet[] = [
     speed: 0.0008,
   },
 ];
+
+export const isStar = (p: Planet): boolean => p.type === 'STAR';

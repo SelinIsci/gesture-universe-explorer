@@ -1,5 +1,5 @@
-import type { Planet } from './data/planets';
 import type * as THREE from 'three';
+import type { Planet } from './data/planets';
 
 export type Mode = 'orbit' | 'detail';
 
@@ -7,7 +7,13 @@ export interface PlanetInstance {
   data: Planet;
   group: THREE.Group;
   mesh: THREE.Mesh;
-  moons: { mesh: THREE.Mesh; orbitRadius: number; orbitSpeed: number; rotSpeed: number; phase: number }[];
+  moons: {
+    mesh: THREE.Mesh;
+    orbitRadius: number;
+    orbitSpeed: number;
+    rotSpeed: number;
+    phase: number;
+  }[];
 }
 
 export interface AppState {
@@ -21,7 +27,8 @@ export interface AppState {
 
 export function createState(): AppState {
   return {
-    idx: 0,
+    idx: 3,
+
     zoom: 1.0,
     zoomTarget: 1.0,
     mode: 'orbit',
