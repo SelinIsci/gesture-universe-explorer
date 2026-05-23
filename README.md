@@ -89,7 +89,9 @@ This is a personal exploration project, but ideas, bug reports, and pull request
 
 ## 📜 License
 
-MIT — see [`LICENSE`](LICENSE) (to be added).
+MIT — see [`LICENSE`](LICENSE). Copyright © 2026 Selin İşçi.
+
+Planetary textures under `public/textures/` are derived from NASA imagery / Solar System Scope (CC-BY 4.0) and retain their own attribution requirements — see [`docs/CREDITS.md`](docs/CREDITS.md).
 
 ## 🙏 Credits
 
