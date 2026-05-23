@@ -5,12 +5,18 @@ import type { PlanetInstance } from '../state';
 
 const TEXTURE_BASE = 'textures/';
 
+function loadColorTexture(tl: THREE.TextureLoader, file: string): THREE.Texture {
+  const tex = tl.load(TEXTURE_BASE + file);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
 export function createPlanets(scene: THREE.Scene, manager: THREE.LoadingManager): PlanetInstance[] {
   const tl = new THREE.TextureLoader(manager);
 
   return PLANET_DATA.map((d: Planet): PlanetInstance => {
     const group = new THREE.Group();
-    const tex = tl.load(TEXTURE_BASE + d.file);
+    const tex = loadColorTexture(tl, d.file);
     const mat =
       d.name === 'SUN'
         ? new THREE.MeshBasicMaterial({ map: tex })
@@ -22,7 +28,7 @@ export function createPlanets(scene: THREE.Scene, manager: THREE.LoadingManager)
     group.add(mesh);
 
     if (d.hasRings) {
-      const rt = tl.load(TEXTURE_BASE + 'saturn_ring.png');
+      const rt = loadColorTexture(tl, 'saturn_ring.png');
       const ring = new THREE.Mesh(
         new THREE.RingGeometry(d.size * 1.5, d.size * 2.5, 64),
         new THREE.MeshBasicMaterial({ map: rt, side: THREE.DoubleSide, transparent: true, opacity: 0.75 }),
@@ -36,7 +42,7 @@ export function createPlanets(scene: THREE.Scene, manager: THREE.LoadingManager)
     for (const m of MOONS.filter(mm => mm.parent === d.name)) {
       let moonMat: THREE.Material;
       if (m.file) {
-        moonMat = new THREE.MeshStandardMaterial({ map: tl.load(TEXTURE_BASE + m.file), roughness: 0.9 });
+        moonMat = new THREE.MeshStandardMaterial({ map: loadColorTexture(tl, m.file), roughness: 0.9 });
       } else {
         moonMat = new THREE.MeshStandardMaterial({ color: m.color ?? 0x999999, roughness: 0.9 });
       }

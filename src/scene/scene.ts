@@ -28,8 +28,8 @@ export function createScene(): SceneBundle {
   renderer.toneMappingExposure = 1.1;
   document.body.appendChild(renderer.domElement);
 
-  scene.add(new THREE.AmbientLight(0x111133, 1.2));
-  const sunLight = new THREE.PointLight(0xfff4e0, 6, 2800);
+  scene.add(new THREE.AmbientLight(0x223355, 1.6));
+  const sunLight = new THREE.PointLight(0xfff4e0, 8, 3500, 1.2);
   scene.add(sunLight);
 
   // Starfield
@@ -42,11 +42,18 @@ export function createScene(): SceneBundle {
     );
   }
   const starGeo = new THREE.BufferGeometry();
-  starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3));
+  starGeo.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(starPos, 3),
+  );
   scene.add(
     new THREE.Points(
       starGeo,
-      new THREE.PointsMaterial({ color: 0xffffff, size: 0.5, sizeAttenuation: true }),
+      new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.5,
+        sizeAttenuation: true,
+      }),
     ),
   );
 
