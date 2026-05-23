@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🪐 Gesture Universe Explorer
+#  Gesture Universe Explorer
 
 **Navigate the solar system with your hands.**
 
@@ -12,7 +12,7 @@ A browser-based 3D solar system you steer with webcam hand gestures — swipe be
 
 ---
 
-## ✨ Features
+##  Features
 
 - **Nine celestial bodies** — Sun and all eight planets with textured spheres, orbital motion, and Saturn's rings.
 - **Eight moons** — Earth's Moon (textured), Phobos & Deimos, the four Galilean satellites of Jupiter, and Titan.
@@ -33,7 +33,7 @@ A browser-based 3D solar system you steer with webcam hand gestures — swipe be
 | Build          | [Vite 5](https://vitejs.dev/) + [TypeScript 5](https://www.typescriptlang.org/) (strict)    |
 | Fonts          | Space Mono · Rajdhani (Google Fonts)                                                        |
 
-## 🚀 Quick Start
+##  Quick Start
 
 ```powershell
 npm install
@@ -43,7 +43,7 @@ npm run build   # type-check + production bundle into dist/
 
 Allow camera access when prompted. The HUD's `HAND STATUS` chip will switch from `◌ SEARCHING HAND` to `◉ HAND ACTIVE` once your hand is detected. Without a webcam the chip turns to `⌨ KEYBOARD ACTIVE` after a few seconds and all keyboard controls take over.
 
-## 🎮 Controls
+##  Controls
 
 | Gesture                | Action                            | Keyboard           |
 | ---------------------- | --------------------------------- | ------------------ |
@@ -53,7 +53,7 @@ Allow camera access when prompted. The HUD's `HAND STATUS` chip will switch from
 | ✋ Open palm           | Close Planetary Dossier           | `Esc`              |
 | —                      | Pause / resume orbital motion     | `Space`            |
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 gesture-universe-explorer/
@@ -73,7 +73,7 @@ gesture-universe-explorer/
 
 See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the module-by-module breakdown.
 
-## 📚 Documentation
+##  Documentation
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — module layout, rendering pipeline, state model
 - [`docs/GESTURES.md`](docs/GESTURES.md) — gesture detection, tuning constants, how to add a new gesture
@@ -83,20 +83,20 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the module-by-module brea
 - [`docs/PROGRESS.md`](docs/PROGRESS.md) — phased roadmap with task status
 - [`docs/CREDITS.md`](docs/CREDITS.md) — library, font, and texture attributions
 
-## 🤝 Contributing
+##  Contributing
 
 This is a personal exploration project, but ideas, bug reports, and pull requests are welcome. Please open an issue first for non-trivial changes so we can align on direction.
 
-## 📜 License
+##  License
 
-MIT — see [`LICENSE`](LICENSE). Copyright © 2026 Selin İşçi.
+MIT — see [`LICENSE`](LICENSE). Copyright © 2026 Selin İşci.
 
 Planetary textures under `public/textures/` are derived from NASA imagery / Solar System Scope (CC-BY 4.0) and retain their own attribution requirements — see [`docs/CREDITS.md`](docs/CREDITS.md).
 
-## 🙏 Credits
+##  Credits
 
 Built with Three.js and MediaPipe Hands. Planetary textures derived from NASA imagery — see [`docs/CREDITS.md`](docs/CREDITS.md) for full attributions.
 
 <div align="center">
-<sub>Made with curiosity. Point your camera at the cosmos. 🌌</sub>
+<sub>Made with curiosity. Point your camera at the cosmos. </sub>
 </div>
